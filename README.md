@@ -54,6 +54,10 @@ cp -R sdd-pipeline/agents/* ~/.claude/agents/
 /plugin install sdd-pipeline@sdd-pipeline
 ```
 
+## 深入了解
+
+想先搞懂 SDD 四大步驟本身在做什麼、每一步的目的與產出，再決定要不要安裝，可以看 [docs/sdd-four-steps.md](./docs/sdd-four-steps.md)。
+
 ## 使用時機
 
 要依 Spec-First 流程開發一個新 API，包含設計 OpenAPI 3.1 契約、啟動 Mock Server 讓前後端平行開發、生成 SDK 或 Server Stub、執行契約測試並偵測規格漂移時，直接在對話中提出需求，Claude Code 會自動判斷套用 `sdd-pipeline` Skill。
