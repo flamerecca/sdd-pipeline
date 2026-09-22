@@ -1,0 +1,22 @@
+{
+  "name": "sdd-pipeline",
+  "version": "1.0.0",
+  "description": "規格驅動開發 (Spec-Driven Development / SDD) 完整工作流程：OpenAPI 3.1 契約設計、Mock Server、SDK/Stub 生成、契約測試與規格漂移稽核。",
+  "author": {
+    "name": "Recca Chao",
+    "email": "flamerecca711@gmail.com"
+  },
+  "homepage": "https://github.com/flamerecca/sdd-pipeline",
+  "repository": "https://github.com/flamerecca/sdd-pipeline",
+  "license": "MIT",
+  "keywords": [
+    "sdd",
+    "spec-driven-development",
+    "openapi",
+    "contract-testing",
+    "mocking",
+    "spec-drift"
+  ],
+  "skills": "./skills/",
+  "agents": "./agents/"
+}
