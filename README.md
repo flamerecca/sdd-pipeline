@@ -28,6 +28,12 @@ sdd-pipeline/
 | **openapi-contract-designer** | 依 API 需求描述、既有 PRD 或 architecture 規格，設計並精修 OpenAPI 3.1 契約，執行 Spectral Linting 直到規格乾淨為止。只產出規格，不實作程式碼、不生成 SDK、不啟動 Mock Server。 |
 | **contract-drift-auditor** | 比對 OpenAPI 規格與真實運作中的 API 或既有契約測試結果，找出規格漂移，即實際行為與規格宣告不一致之處。只回報落差、不修改任何規格或程式碼，落差交還使用者判斷該修規格還是修實作。 |
 
+## 系統需求
+
+- 已安裝 Node.js 與 npx：四大步驟裡的 Mocking、Spectral Lint、SDK/Stub 生成都是透過 npx 執行對應套件，不需要事先手動安裝這些工具，但要有 Node.js 環境才能跑 npx。
+- 支援 Skill 與 Agent 的 Claude Code 版本，才能讀取本套件裡的 SKILL.md 與 Agent 定義。
+- 想用方式二的 Plugin 安裝，需要支援 Plugin Marketplace 的 Claude Code 版本；不確定版本是否支援時，改用方式一的手動複製即可。
+
 ## 安裝方式
 
 ### 方式一：手動複製，最簡單、保證可用
@@ -54,9 +60,31 @@ cp -R sdd-pipeline/agents/* ~/.claude/agents/
 /plugin install sdd-pipeline@sdd-pipeline
 ```
 
+## 快速開始
+
+安裝完成後，在 Claude Code 裡直接描述需求即可，不需要手動點名 Skill 或 Agent，例如：
+
+> 幫我用 SDD 流程設計一個訂單 API，包含建立訂單、查詢訂單、取消訂單三個操作。
+
+Claude Code 會依序：
+
+1. 判斷這是完整的 Spec-First 開發需求，套用 `sdd-pipeline` Skill。
+2. 呼叫 `openapi-contract-designer` Agent，產出一份通過 Spectral Lint 的 `openapi.yaml`。
+3. 執行 `npx @stoplight/prism-cli mock openapi.yaml -p 4010`，啟動 Mock Server，讓你可以立刻用這個網址測試前端串接。
+4. 依專案語言生成對應的 SDK 或 Server Stub。
+5. 實作完成後，呼叫 `contract-drift-auditor` Agent 複核，回報規格與實際行為是否一致。
+
 ## 深入了解
 
 想先搞懂 SDD 四大步驟本身在做什麼、每一步的目的與產出，再決定要不要安裝，可以看 [docs/sdd-four-steps.md](./docs/sdd-four-steps.md)。
+
+## 延伸閱讀
+
+`spec-driven-development` Skill 底下還有三份可以獨立閱讀的教材：
+
+- [OpenAPI 3.1 契約設計指南](./skills/spec-driven-development/references/openapi-spec-design-guide.md)：Path、Schema、Components 設計慣例與 Spectral Linting。
+- [Mocking 與契約測試指南](./skills/spec-driven-development/references/contract-testing-mocking.md)：Prism Mock Server、SDK 生成與契約測試工具鏈。
+- [驗收規格範本](./skills/spec-driven-development/references/acceptance-spec-template.md)：情境／操作／驗證 (Arrange-Act-Assert) 格式的驗收規格寫法。
 
 ## 使用時機
 
