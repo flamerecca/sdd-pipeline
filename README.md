@@ -19,7 +19,7 @@ sdd-pipeline/
 | 名稱 | 用途 |
 | :--- | :--- |
 | **sdd-pipeline** | 執行版，負責實際跑一遍 SDD 四大步驟，並在關鍵步驟委派對應的 Agent 處理。 |
-| **spec-driven-development** | 教學版，提供 OpenAPI 3.1 語法範本、Mocking 與契約測試指令範例、BDD Gherkin 範本；`sdd-pipeline` Skill 遇到語法細節時會直接引用這裡的內容，不重複維護一份。 |
+| **spec-driven-development** | 教學版，提供 OpenAPI 3.1 語法範本、Mocking 與契約測試指令範例、情境／操作／驗證 (Arrange-Act-Assert) 驗收規格範本；`sdd-pipeline` Skill 遇到語法細節時會直接引用這裡的內容，不重複維護一份。 |
 
 ### Agent
 
@@ -58,7 +58,7 @@ cp -R sdd-pipeline/agents/* ~/.claude/agents/
 
 要依 Spec-First 流程開發一個新 API，包含設計 OpenAPI 3.1 契約、啟動 Mock Server 讓前後端平行開發、生成 SDK 或 Server Stub、執行契約測試並偵測規格漂移時，直接在對話中提出需求，Claude Code 會自動判斷套用 `sdd-pipeline` Skill。
 
-只是要查 OpenAPI 語法、YAML 範本或 BDD Gherkin 範本，屬於教學情境，會改用 `spec-driven-development` Skill，兩者分工詳見 `skills/sdd-pipeline/SKILL.md` 開頭的說明。
+只是要查 OpenAPI 語法、YAML 範本或情境／操作／驗證驗收規格範本，屬於教學情境，會改用 `spec-driven-development` Skill，兩者分工詳見 `skills/sdd-pipeline/SKILL.md` 開頭的說明。
 
 ## 授權
 
