@@ -6,6 +6,7 @@
 
 ```
 sdd-pipeline/
+├── install.sh   一鍵安裝腳本：把 skills/ 與 agents/ 複製到指定範圍
 ├── skills/
 │   ├── sdd-pipeline/              執行版：實際跑一遍 SDD 四大步驟
 │   └── spec-driven-development/   教學版：語法、範本與指令範例
@@ -33,6 +34,7 @@ sdd-pipeline/
 - 已安裝 Node.js 與 npx：四大步驟裡的 Mocking、Spectral Lint、SDK/Stub 生成都是透過 npx 執行對應套件，不需要事先手動安裝這些工具，但要有 Node.js 環境才能跑 npx。
 - 支援 Skill 與 Agent 的 Claude Code 版本，才能讀取本套件裡的 SKILL.md 與 Agent 定義。
 - 想用方式二的 Plugin 安裝，需要支援 Plugin Marketplace 的 Claude Code 版本；不確定版本是否支援時，改用方式一的手動複製即可。
+- 想用方式三的一鍵安裝指令，環境需要有 `git` 與 Bash，指令內部會用 `git clone` 抓取套件內容，兩者缺一都無法執行，改用方式一即可。
 
 ## 安裝方式
 
@@ -59,6 +61,22 @@ cp -R sdd-pipeline/agents/* ~/.claude/agents/
 /plugin marketplace add flamerecca/sdd-pipeline
 /plugin install sdd-pipeline@sdd-pipeline
 ```
+
+### 方式三：一鍵安裝指令，最快速
+
+不想手動 clone 也不想透過 Plugin Marketplace 時，直接執行 [`install.sh`](./install.sh)：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/flamerecca/sdd-pipeline/main/install.sh | bash
+```
+
+指令內部會把套件 clone 到暫存目錄，再將 `skills/` 與 `agents/` 複製到 `~/.claude/`，完成後自動清除暫存目錄。若要安裝到目前所在專案而非全域，加上 `--project` 參數，會改複製到 `<目前目錄>/.claude/`：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/flamerecca/sdd-pipeline/main/install.sh | bash -s -- --project
+```
+
+複製完成後同樣需要重新啟動 Claude Code 才會套用。
 
 ## 快速開始
 
