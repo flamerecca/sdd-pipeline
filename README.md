@@ -6,7 +6,8 @@
 
 ```
 sdd-pipeline/
-├── install.sh   一鍵安裝腳本：把 skills/ 與 agents/ 複製到指定範圍
+├── install.sh               一鍵安裝腳本：把 skills/ 與 agents/ 複製到指定範圍
+├── check-requirements.sh    系統需求檢查腳本：安裝前確認 git、Bash、curl、Node.js、npx 是否備齊
 ├── skills/
 │   ├── sdd-pipeline/              執行版：實際跑一遍 SDD 四大步驟
 │   └── spec-driven-development/   教學版：語法、範本與指令範例
@@ -37,6 +38,22 @@ sdd-pipeline/
 - 想用方式三的一鍵安裝指令，環境需要有 `git` 與 Bash，指令內部會用 `git clone` 抓取套件內容，兩者缺一都無法執行，改用方式一即可。
 
 ## 安裝方式
+
+### 安裝前：檢查系統需求
+
+不確定環境是否備齊上面列的系統需求時，可以先執行 [`check-requirements.sh`](./check-requirements.sh) 逐項檢查 git、Bash、curl、Node.js 與 npx 是否已安裝：
+
+```bash
+./check-requirements.sh
+```
+
+或不 clone 儲存庫，直接用 curl 下載執行：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/flamerecca/sdd-pipeline/main/check-requirements.sh | bash
+```
+
+腳本會列出每一項需求的檢查結果，並提醒 Skill、Agent 與 Plugin Marketplace 的支援仍須依 Claude Code 版本另行確認；全部項目通過時結束代碼為 `0`，有缺項時為 `1`，方便串進其他自動化流程判斷。
 
 ### 方式一：手動複製，最簡單、保證可用
 
